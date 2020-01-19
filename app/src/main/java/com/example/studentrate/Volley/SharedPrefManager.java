@@ -22,7 +22,6 @@ public class SharedPrefManager {
     private static final String KEY_ANNEE_CLASS = "keyannee";
 
 
-
     private static SharedPrefManager mInstance;
     private static Context ctx;
 
@@ -41,25 +40,35 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_ID, etudiant.get_id());
-        editor.putString(KEY_NOM,etudiant.getNom());
-        editor.putString(KEY_PRENOM,etudiant.getPrenom());
-        editor.putString(KEY_EMAIL,etudiant.getEmail());
+        editor.putString(KEY_NOM, etudiant.getNom());
+        editor.putString(KEY_PRENOM, etudiant.getPrenom());
+        editor.putString(KEY_EMAIL, etudiant.getEmail());
         editor.putString(KEY_NUMTEL, etudiant.getNumTel());
-        editor.putString(KEY_NUMINSCRIPTION,etudiant.getNumInscription());
-        editor.putString(KEY_CIN,etudiant.getCin());
+        editor.putString(KEY_NUMINSCRIPTION, etudiant.getNumInscription());
+        editor.putString(KEY_CIN, etudiant.getCin());
         editor.apply();
     }
 
     public void ClassLogin(Class classes) {
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_ID_CLASS,classes.get_id());
-        editor.putString(KEY_NOM_CLASS,classes.getNom());
+        editor.putString(KEY_ID_CLASS, classes.get_id());
+        editor.putString(KEY_NOM_CLASS, classes.getNom());
         editor.putString(KEY_ANNEE_CLASS, classes.getAnnee());
         editor.apply();
     }
 
-    
+    public Etudiant getEtudiant() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return new Etudiant(sharedPreferences.getString(KEY_ID, null),
+                sharedPreferences.getString(KEY_NOM,null),
+                sharedPreferences.getString(KEY_PRENOM,null),
+                sharedPreferences.getString(KEY_EMAIL,null),
+                sharedPreferences.getString(KEY_NUMTEL,null),
+                sharedPreferences.getString(KEY_NUMINSCRIPTION,null),
+                sharedPreferences.getString(KEY_CIN,null)
+        );
+    }
 
 
 }
